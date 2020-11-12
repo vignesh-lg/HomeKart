@@ -20,7 +20,7 @@ namespace HomeKart
         {
             if (!filtercontext.ExceptionHandled && filtercontext.Exception is NullReferenceException)
             {
-                CustomExceptionHandler customExceptionHandler = new CustomExceptionHandler()
+                CustomExceptionHandler customExceptionHandler = new CustomExceptionHandler() 
                 {
                     ExceptionMessage = filtercontext.Exception.Message,
                     TraceException = filtercontext.Exception.StackTrace,
