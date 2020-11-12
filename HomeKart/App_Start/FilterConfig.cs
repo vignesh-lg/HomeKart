@@ -22,7 +22,7 @@ namespace HomeKart
             {
                 CustomExceptionHandler customExceptionHandler = new CustomExceptionHandler() 
                 {
-                    ExceptionMessage = filtercontext.Exception.Message,
+                    ExceptionMessage = filtercontext.Exception.Message, 
                     TraceException = filtercontext.Exception.StackTrace,
                     ControllerName = filtercontext.RouteData.Values["controller"].ToString(),
                     ActionName = filtercontext.RouteData.Values["action"].ToString(),
