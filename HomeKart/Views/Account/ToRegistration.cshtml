@@ -1,0 +1,90 @@
+﻿@model HomeKart.Models.AccountModel
+
+@{
+    ViewBag.Title = "ToRegistration";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>ToRegistration</h2>
+<script src="https://kit.fontawesome.com/64d58efce2.js"></script>
+<link href="~/Content/style.css" rel="stylesheet" />
+@using (Html.BeginForm("ToRegistration", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <div class="sign-in-form" , id="myforms">
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.PinCode, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.CellNumber, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "validation_message" })
+
+                    <h2 class="title">Sign Up</h2>
+                    <div class="input-field">
+
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter UserName" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter MailID" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter Address" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter Pincode" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.CellNumber, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter CellNumber" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "login-password", @placeholder = "Enter Password" } })
+
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter MailID" } })
+                    </div>
+                    <input type="submit" value="Register" class="btn solid" />
+                    <p class="social-text">Or Sign in with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Already here ?</h3>
+                    <p>
+                        Welcome, please login to continue the best user experience
+                    </p>
+                    <a href='@Url.Action("Login", "Account")' class="btn transparent" id="sign-up-btn">
+                        Sign up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

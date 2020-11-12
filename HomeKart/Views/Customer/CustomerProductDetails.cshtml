@@ -1,0 +1,52 @@
+﻿@model HomeKartEntity.Product
+@{
+    ViewBag.Title = "CustomerProductDetails";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Product Details</h2>
+<div>
+    <dl>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.ProductImage)" alt="" width="80" height="60" />
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("AddToCartCustomer", "Customer", new { id = Model.ProductId }, FormMethod.Post))
+    {
+        <button type="submit" style="border-radius:12px;background:aqua;color:midnightblue;padding:10px"> <i class="fa fa-shopping-cart"></i>Cart</button>
+    }
+    <p class="custom-button" style="margin-top:12px">
+        @Html.ActionLink("Back to List", "CustomerProductData")
+    </p>
+</div>
+
+
+

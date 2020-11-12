@@ -1,0 +1,50 @@
+﻿@model HomeKartEntity.User
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<div>
+<dl>
+   
+    <dt>
+        @Html.DisplayNameFor(model => model.CellNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CellNumber)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Role)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Role)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.UserId)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserId)
+    </dd>
+</dl>
+<p class="custom-button">
+    @Html.ActionLink("Update", "Update", new {  id = Model.UserId }) 
+    @Html.ActionLink("Back to List", "CustomerData")
+</p>
+</div>

@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "AddToCartCustomerDisplay";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Add To Cart</h2>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<div class="search-box">
+    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Product names.." title="Type in a name">
+    <span class="input-group-text"><i class="fa fa-search"></i></span>
+</div>
+
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Update Quantity
+            </th>
+            <th>Manipulations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Session["cart"] != null)
+        {
+            foreach (var Item in (List<HomeKart.Models.CartModel>)Session["cart"])
+            {
+
+                <tr>
+                    <td>
+                        @Item.ProductName
+                    </td>
+                    <td>
+                        @Item.Quantity
+                    </td>
+                    <td>
+                        <a href="@Url.Action("AddToCartCustomer", "Customer", new { id = Item.ProductId })">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a href="@Url.Action("DecreaseQuantity", "Customer", new { id = Item.ProductId })">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                    </td>
+                    <td class="custom-button">
+
+                        @Html.ActionLink("Remove", "RemoveFromCartCustomer", new { id = Item.ProductId })
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td style="border-collapse:collapse;text-align:center;background-color:red;">
+                    No products in the Cart
+                </td>
+
+                <td style="border-collapse:collapse;text-align:center;background-color:red;">
+                    No products in the Cart
+                </td>
+                <td class="custom-button">
+
+                    @Html.ActionLink("Add", "CustomerProductData")
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    <p class="custom-button" style="margin-top:12px">
+        @Html.ActionLink("Place Order", "RegisterOrder")
+    </p>
+

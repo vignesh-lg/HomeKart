@@ -1,0 +1,90 @@
+﻿@model HomeKart.Models.OrderModel
+@{
+    ViewBag.Title = "RegisterOrder";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using (Html.BeginForm("RegisterOrder", "Customer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <link href="~/Content/style.css" rel="stylesheet" />
+    {
+<h2>Order Details</h2>
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>Rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int Total = 0;
+        }
+        @if (Session["cart"] != null)
+        {
+            foreach (var Item in (List<HomeKart.Models.CartModel>)Session["cart"])
+            {
+                int lineTotal = Convert.ToInt32(Item.Quantity * Item.Price);
+                Total = Convert.ToInt32(@Total + lineTotal);
+                <tr>
+                    <td>
+                        @Item.ProductName
+                    </td>
+                    <td>
+                        @Item.Quantity
+                    </td>
+                    <td>
+                        @Item.Price
+                    </td>
+                    <td>
+                        @lineTotal
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="4" class="text-right"><b>Total: @Total</b></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td style="border-collapse:collapse;text-align:center;background-color:red;">
+                    No products in the Cart
+                </td>
+
+                <td style="border-collapse:collapse;text-align:center;background-color:red;">
+                    No products in the Cart
+                </td>
+                <td class="custom-button">
+
+                    @Html.ActionLink("Back", "CustomerProductData")
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <div class="input-field">
+        <i class="fa fa-envelope"></i>
+        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter Address" } })
+    </div>
+    <div class="input-field">
+        <i class="fa fa-envelope"></i>
+        @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter Pincode" } })
+    </div>
+    <p class="custom-button" style="margin-top:12px">
+        <input type="submit" value="Submit Order" />
+    </p>
+    }
+}
+
+

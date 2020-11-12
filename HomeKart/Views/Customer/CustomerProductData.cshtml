@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HomeKartEntity.Product>
+@{
+    ViewBag.Title = "CustomerProductData";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<div class="search-box">
+    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for Product names.." title="Type in a name">
+    <span class="input-group-text"><i class="fa fa-search"></i></span>
+</div>
+
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductImage)
+            </th>
+            <th>Manipulations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="@Url.Content(@item.ProductImage)" alt="" width="80" height="60" />
+                </td>
+                <td class="custom-button">
+                    
+                    @Html.ActionLink("Details", "CustomerProductDetails", new { id = item.ProductId }, null)
+         
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

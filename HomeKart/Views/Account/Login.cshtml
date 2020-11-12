@@ -1,0 +1,72 @@
+﻿@model HomeKart.Models.AccountModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    if (TempData["Message"] != null)
+    {
+        <p>
+            @TempData["Message"].ToString()
+        </p>
+    }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <div class="sign-in-form" , id="myforms">
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation_message" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation_message" })
+                    <h2 class="title">Sign in</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "login-text", @placeholder = "Enter MailID" } })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "login-password", @placeholder = "Enter Password" } })
+                    </div>
+                    <div>
+
+                    </div>
+                    <input type="submit" value="Login" class="btn solid" />
+                    <p class="social-text">Or Sign in with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>New here ?</h3>
+                    <p>
+                        Welcome, please register for the best user experience
+                    </p>
+                    <a href='@Url.Action("Registration", "Account")' class="btn transparent" id="sign-up-btn">
+                        Sign up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
